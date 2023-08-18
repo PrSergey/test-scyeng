@@ -1,6 +1,6 @@
 package com.example.skyengtest.constant;
 
-public enum StatusItem {
+public enum ItemStatus {
 
     ACCEPTED,
 

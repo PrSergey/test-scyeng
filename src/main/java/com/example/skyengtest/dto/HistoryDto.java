@@ -1,6 +1,6 @@
 package com.example.skyengtest.dto;
 
-import com.example.skyengtest.constant.StatusDelivery;
+import com.example.skyengtest.constant.DeliveryStatus;
 import lombok.Data;
 
 @Data
@@ -10,6 +10,6 @@ public class HistoryDto {
 
     private PostalItemRequestDto item;
 
-    private StatusDelivery status;
+    private DeliveryStatus status;
 
 }

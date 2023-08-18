@@ -1,7 +1,6 @@
 package com.example.skyengtest.model;
 
-import com.example.skyengtest.constant.StatusDelivery;
-import com.example.skyengtest.constant.StatusItem;
+import com.example.skyengtest.constant.ItemStatus;
 import com.example.skyengtest.constant.TypeItem;
 import lombok.*;
 
@@ -19,7 +18,7 @@ public class PostalItem {
 
     private PostOffice postoffice;
 
-    private StatusItem statusItem;
+    private ItemStatus itemStatus;
 
     private List<History> historyItem;
 

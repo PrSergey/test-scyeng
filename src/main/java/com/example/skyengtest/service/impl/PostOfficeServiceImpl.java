@@ -1,9 +1,10 @@
-package com.example.skyengtest.service;
+package com.example.skyengtest.service.impl;
 
 import com.example.skyengtest.dto.PostalItemRequestDto;
 import com.example.skyengtest.dto.PostalItemResponseDto;
 import com.example.skyengtest.model.PostOffice;
 import com.example.skyengtest.repository.PostOfficeRepository;
+import com.example.skyengtest.service.PostOfficeService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

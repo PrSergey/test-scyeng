@@ -1,8 +1,12 @@
 package com.example.skyengtest.model;
 
-import com.example.skyengtest.constant.StatusDelivery;
-import com.example.skyengtest.constant.StatusItem;
+import com.example.skyengtest.constant.DeliveryStatus;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class History {
 
     private long id;
@@ -11,6 +15,11 @@ public class History {
 
     private PostalItem item;
 
-    private StatusDelivery status;
+    private DeliveryStatus status;
 
+    public History(PostalItem item, PostOffice office, DeliveryStatus status) {
+        this.office = office;
+        this.item = item;
+        this.status = status;
+    }
 }

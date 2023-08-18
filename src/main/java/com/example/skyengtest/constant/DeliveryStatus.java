@@ -1,9 +1,11 @@
 package com.example.skyengtest.constant;
 
-public enum StatusDelivery {
+public enum DeliveryStatus {
 
     ACCEPTED,
 
-    DESPATCHED
+    DESPATCHED,
+
+    DELIVERY
 
 }
