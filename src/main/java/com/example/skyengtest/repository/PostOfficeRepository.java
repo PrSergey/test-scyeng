@@ -5,4 +5,7 @@ import com.example.skyengtest.model.PostOffice;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PostOfficeRepository extends JpaRepository<PostOffice, Long> {
+
+    boolean existsByIndex(String index);
+
 }

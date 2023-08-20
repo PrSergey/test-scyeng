@@ -1,25 +1,37 @@
 package com.example.skyengtest.model;
 
 import com.example.skyengtest.constant.ItemStatus;
-import com.example.skyengtest.constant.TypeItem;
+import com.example.skyengtest.constant.ItemType;
+import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "postal_item")
 public class PostalItem {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private TypeItem type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type_item")
+    private ItemType type;
 
-    private PostOffice postoffice;
+    @ManyToOne
+    @JoinColumn(name = "delivery_address_id")
+    private PostOffice postOffice;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private ItemStatus itemStatus;
 
-    private List<History> historyItem;
+    @Column(name = "recipient_name")
+    private String recipientName;
+
 
 }
