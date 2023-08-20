@@ -1,6 +1,6 @@
 package com.example.skyengtest.constant;
 
-public enum TypeItem {
+public enum ItemType {
 
     LETTER,
     PACKAGE,

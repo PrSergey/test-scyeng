@@ -11,11 +11,11 @@ public interface PostalItemService {
 
     PostalItemResponseDto registrationPostalItem(PostalItemRequestDto postalItemDto);
 
-    PostalItemResponseDto sendingParcel(Long itemId, PostOfficeDto postOfficeDto);
+    PostalItemResponseDto sendingParcel(Long itemId, Long postOfficeId);
 
-    PostalItemResponseDto acceptParcel(Long itemId, PostOfficeDto postOfficeDto);
+    PostalItemResponseDto acceptParcel(Long itemId, Long postOfficeId);
 
-    PostalItemResponseDto deliveredParcel(Long itemId, PostOfficeDto postOfficeDto);
+    PostalItemResponseDto deliveredParcel(Long itemId, Long postOfficeId);
 
     List<HistoryDto> getHistoryByParcel(Long itemId);
 
