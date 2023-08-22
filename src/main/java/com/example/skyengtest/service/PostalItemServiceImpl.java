@@ -1,4 +1,4 @@
-package com.example.skyengtest.service.impl;
+package com.example.skyengtest.service;
 
 import com.example.skyengtest.constant.DeliveryStatus;
 import com.example.skyengtest.constant.ItemStatus;

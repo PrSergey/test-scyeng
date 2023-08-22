@@ -1,6 +1,5 @@
-package com.example.skyengtest.service.impl;
+package com.example.skyengtest.service;
 
-import com.example.skyengtest.conf.TestConf;
 import com.example.skyengtest.constant.ItemStatus;
 import com.example.skyengtest.constant.ItemType;
 import com.example.skyengtest.dto.HistoryDto;
@@ -22,7 +21,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;

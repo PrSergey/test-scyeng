@@ -1,0 +1,29 @@
+version: '3.1'
+services:
+  skyeng:
+    build: .
+    image: skyeng
+    container_name: skyeng
+    ports:
+      - "8080:8080"
+    depends_on:
+      - skyeng-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://skyeng-db:5432/skyeng
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+
+  skyeng-db:
+    image: postgres:14-alpine
+    container_name: skyeng-db
+    ports:
+      - "6541:5432"
+    volumes:
+      - /var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=skyeng
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+
+

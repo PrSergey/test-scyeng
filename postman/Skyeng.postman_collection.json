@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "cd72c0be-9c8d-4b4d-befb-0ae9e4ed1f4e",
 		"name": "Skyeng",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "25071538"
 	},
 	"item": [
@@ -40,17 +40,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/office",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"office"
-							]
-						}
+						"url": "http://localhost:8080/office"
 					},
 					"response": []
 				},
@@ -85,17 +75,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/office",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"office"
-							]
-						}
+						"url": "http://localhost:8080/office"
 					},
 					"response": []
 				},
@@ -130,17 +110,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/office",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"office"
-							]
-						}
+						"url": "http://localhost:8080/office"
 					},
 					"response": []
 				},
@@ -175,17 +145,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/office",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"office"
-							]
-						}
+						"url": "http://localhost:8080/office"
 					},
 					"response": []
 				},
@@ -220,17 +180,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/office",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"office"
-							]
-						}
+						"url": "http://localhost:8080/office"
 					},
 					"response": []
 				},
@@ -265,17 +215,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/office",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"office"
-							]
-						}
+						"url": "http://localhost:8080/office"
 					},
 					"response": []
 				}
@@ -315,18 +255,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/item/registration",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"item",
-								"registration"
-							]
-						}
+						"url": "http://localhost:8080/item/registration"
 					},
 					"response": []
 				},
@@ -361,18 +290,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/item/registration",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"item",
-								"registration"
-							]
-						}
+						"url": "http://localhost:8080/item/registration"
 					},
 					"response": []
 				},
@@ -407,18 +325,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/item/registration",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"item",
-								"registration"
-							]
-						}
+						"url": "http://localhost:8080/item/registration"
 					},
 					"response": []
 				},
@@ -453,18 +360,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/item/registration",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"item",
-								"registration"
-							]
-						}
+						"url": "http://localhost:8080/item/registration"
 					},
 					"response": []
 				},
@@ -499,18 +395,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/item/registration",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"item",
-								"registration"
-							]
-						}
+						"url": "http://localhost:8080/item/registration"
 					},
 					"response": []
 				},

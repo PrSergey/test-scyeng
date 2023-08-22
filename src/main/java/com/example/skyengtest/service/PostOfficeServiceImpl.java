@@ -1,4 +1,4 @@
-package com.example.skyengtest.service.impl;
+package com.example.skyengtest.service;
 
 import com.example.skyengtest.dto.PostOfficeDto;
 import com.example.skyengtest.dto.PostalItemRequestDto;
@@ -27,15 +27,15 @@ public class PostOfficeServiceImpl implements PostOfficeService {
     @Override
     public PostOfficeDto savePostOffice(PostOfficeDto postOfficeDto) {
         PostOffice postOffice = modelMapper.map(postOfficeDto, PostOffice.class);
-        addressRepository.save(postOffice.getAddress());
         checkIndex(postOffice.getIndex());
+        addressRepository.save(postOffice.getAddress());
         PostOffice postOfficeAfterSave = postOfficeRepository.save(postOffice);
         return modelMapper.map(postOfficeAfterSave, PostOfficeDto.class);
     }
 
     private void checkIndex(String index) {
-        if(postOfficeRepository.existsByIndex(index)) {
-            throw new ValidationException(String.format("Post office with index=%s already exists" , index));
+        if (postOfficeRepository.existsByIndex(index)) {
+            throw new ValidationException(String.format("Post office with index=%s already exists", index));
         }
     }
 
