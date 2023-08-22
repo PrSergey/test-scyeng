@@ -24,6 +24,6 @@ public class PostOffice {
     private String title;
 
     @ManyToOne
-    @JoinColumn(name = "addres_id")
+    @JoinColumn(name = "address_id")
     private Address address;
 }

@@ -1,0 +1,611 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "description": "API для работы с почтовыми отправлениями",
+      "name": "Почтовые отправления"
+    },
+    {
+      "description": "API для работы с почтовыми отделениями",
+      "name": "Почтовые отделения"
+    }
+  ],
+  "paths": {
+     "/item/registration": {
+      "post": {
+        "summary": "Регистрации почтового отправления",
+        "description": "Обратите внимание: почтовое отеделение должно быть добавлено заранее",
+        "tags": [
+          "Почтовые отправления"
+        ],
+        "operationId": "registrationPostalItem_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostalItemRequestDto"
+              }
+            }
+          },
+          "required": true,
+          "description": "данные добавляемого почтового отправления"
+        },
+        "responses": {
+          "201": {
+            "description": "Почтовое отправление добавлено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostalItemResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Почтовое отделение не найдено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Запрос составлен некорректно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/item/sending": {
+      "put": {
+        "summary": "Отправление посылки",
+        "tags": [
+          "Почтовые отправления"
+        ],
+        "operationId": "sendingParcel",
+        "parameters": [
+          {
+            "description": "индитификатор посылки",
+            "name": "itemId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "description": "индитификатор почтового отделения, куда посылку нужно отправить",
+            "name": "postOfficeId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Посылка отправлена и статус посылки изменился на - ON_THE_WAY",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostalItemResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Посылка или почтовое отделение не найдено в базе",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Посылка не находится в почтовом отделении",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+     "/item/accept": {
+      "put": {
+        "summary": "Прибытие в промежуточное почтовое отделение",
+        "description": "Обратите внимание: \n - что почтовое отделение должно быть добавлено заранее (Ожидаемы код ошибки 404); \n - статус посылки должен быть - ON_THE_WAY (Ожидаемый код ошибки 409)",
+        "tags": [
+          "Почтовые отправления"
+        ],
+        "operationId": "acceptParcel",
+        "parameters": [
+          {
+            "description": "индитификатор посылки",
+            "name": "itemId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "description": "индитификатор почтового отделения",
+            "name": "postOfficeId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Посылка принята в почтовое отделение и статус посылки изменился на - ACCEPTED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostalItemResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Посылка или почтовое отделение не найдено в базе",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Запрос составлен некорректно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/item/delivery": {
+      "put": {
+        "summary": "Прибытие в конечный пункт",
+        "description": "Обратите внимание: \n - что почтовое отделение должно быть добавлено заранее (Ожидаемы код ошибки 404); \n - статус посылки должен быть - ON_THE_WAY (Ожидаемый код ошибки 409)",
+        "tags": [
+          "Почтовые отправления"
+        ],
+        "operationId": "deliveredParcel",
+        "parameters": [
+          {
+            "description": "индитификатор посылки",
+            "name": "itemId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "description": "индитификатор почтового отделения",
+            "name": "postOfficeId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Посылка доставлена в пункт назначения и статус изменен на DELIVERED",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostalItemResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Посылка или почтовое отделение не найдено в базе",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Запрос составлен некорректно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+   
+    "/office": {
+      "post": {
+        "description": "Обратите внимание: индекс почтового отделения должен быть уникальным.",
+        "summary": "Создание почтового отделения.",
+        "tags": [
+          "Почтовые отделения"
+        ],
+        "operationId": "registrationPostalItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostOfficeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Почтовое отделение создано",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostOfficeDto"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Запрос составлен некорректно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+       "/item/history": {
+      "get": {
+        "summary": "Получение истории перемещения посылки.",
+        "tags": [
+          "Почтовые отправления"
+        ],
+        "operationId": "getHistoryByParcel",
+        "parameters": [
+          {
+            "description": "Идентификатор почтового отправления",
+            "name": "itemId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Найдена история премещения посылки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HistoryDto"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Запрос составлен некорректно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  },
+  "components": {
+    "schemas": {
+      "ApiError": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "description": "Список стектрейсов или описания ошибок",
+            "example": [],
+            "items": {
+              "type": "string",
+              "description": "Список стектрейсов или описания ошибок",
+              "example": "[]"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Сообщение об ошибке",
+            "example": "Only pending or canceled events can be changed"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Общее описание причины ошибки",
+            "example": "For the requested operation the conditions are not met."
+          },
+          "status": {
+            "type": "string",
+            "description": "Код статуса HTTP-ответа",
+            "example": "FORBIDDEN",
+            "enum": [
+              "100 CONTINUE",
+              "101 SWITCHING_PROTOCOLS",
+              "102 PROCESSING",
+              "103 CHECKPOINT",
+              "200 OK",
+              "201 CREATED",
+              "202 ACCEPTED",
+              "203 NON_AUTHORITATIVE_INFORMATION",
+              "204 NO_CONTENT",
+              "205 RESET_CONTENT",
+              "206 PARTIAL_CONTENT",
+              "207 MULTI_STATUS",
+              "208 ALREADY_REPORTED",
+              "226 IM_USED",
+              "300 MULTIPLE_CHOICES",
+              "301 MOVED_PERMANENTLY",
+              "302 FOUND",
+              "302 MOVED_TEMPORARILY",
+              "303 SEE_OTHER",
+              "304 NOT_MODIFIED",
+              "305 USE_PROXY",
+              "307 TEMPORARY_REDIRECT",
+              "308 PERMANENT_REDIRECT",
+              "400 BAD_REQUEST",
+              "401 UNAUTHORIZED",
+              "402 PAYMENT_REQUIRED",
+              "403 FORBIDDEN",
+              "404 NOT_FOUND",
+              "405 METHOD_NOT_ALLOWED",
+              "406 NOT_ACCEPTABLE",
+              "407 PROXY_AUTHENTICATION_REQUIRED",
+              "408 REQUEST_TIMEOUT",
+              "409 CONFLICT",
+              "410 GONE",
+              "411 LENGTH_REQUIRED",
+              "412 PRECONDITION_FAILED",
+              "413 PAYLOAD_TOO_LARGE",
+              "413 REQUEST_ENTITY_TOO_LARGE",
+              "414 URI_TOO_LONG",
+              "414 REQUEST_URI_TOO_LONG",
+              "415 UNSUPPORTED_MEDIA_TYPE",
+              "416 REQUESTED_RANGE_NOT_SATISFIABLE",
+              "417 EXPECTATION_FAILED",
+              "418 I_AM_A_TEAPOT",
+              "419 INSUFFICIENT_SPACE_ON_RESOURCE",
+              "420 METHOD_FAILURE",
+              "421 DESTINATION_LOCKED",
+              "422 UNPROCESSABLE_ENTITY",
+              "423 LOCKED",
+              "424 FAILED_DEPENDENCY",
+              "425 TOO_EARLY",
+              "426 UPGRADE_REQUIRED",
+              "428 PRECONDITION_REQUIRED",
+              "429 TOO_MANY_REQUESTS",
+              "431 REQUEST_HEADER_FIELDS_TOO_LARGE",
+              "451 UNAVAILABLE_FOR_LEGAL_REASONS",
+              "500 INTERNAL_SERVER_ERROR",
+              "501 NOT_IMPLEMENTED",
+              "502 BAD_GATEWAY",
+              "503 SERVICE_UNAVAILABLE",
+              "504 GATEWAY_TIMEOUT",
+              "505 HTTP_VERSION_NOT_SUPPORTED",
+              "506 VARIANT_ALSO_NEGOTIATES",
+              "507 INSUFFICIENT_STORAGE",
+              "508 LOOP_DETECTED",
+              "509 BANDWIDTH_LIMIT_EXCEEDED",
+              "510 NOT_EXTENDED",
+              "511 NETWORK_AUTHENTICATION_REQUIRED"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Дата и время когда произошла ошибка (в формате \"yyyy-MM-dd HH:mm:ss\")",
+            "example": "2022-06-09 06:27:23"
+          }
+        },
+        "description": "Сведения об ошибке"
+      },
+      "AddressDto": {
+        "required": [
+          "city",
+          "country",
+          "houseNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string",
+            "description": "Страна",
+            "example": "Россия"
+          },
+          "city": {
+            "type": "string",
+            "description": "Город",
+            "example": "Москва"
+          },
+          "houseNumber": {
+            "type": "string",
+            "description": "Номер дома",
+            "example": "16/2"
+          }
+        }
+      },
+      "PostOfficeDto": {
+        "required": [
+          "address",
+          "index",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор",
+            "format": "int64",
+            "example": 1
+          },
+          "index": {
+            "type": "string",
+            "description": "Индекс",
+            "format": "int64",
+            "example": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressDto"
+          }
+        }
+      },
+      "PostalItemResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор",
+            "format": "int64",
+            "example": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "Тип посылки",
+            "enum": [
+              "LETTER",
+              "PACKAGE",
+              "PARCEL",
+              "POSTCARD"
+            ]
+          },
+          "postoffice": {
+            "$ref": "#/components/schemas/PostOfficeDto"
+          },
+          "itemStatus": {
+            "type": "string",
+            "description": "Статус посылки",
+            "enum": [
+              "ACCEPTED",
+              "ON_THE_WAY",
+              "INTERMEDIATE_POINT",
+              "DELIVERED"
+            ]
+          },
+          "recipientName": {
+            "type": "string",
+            "description": "Имя получателя",
+            "example": "Иван"
+          }
+        }
+      },
+      "PostalItemRequestDto": {
+        "required": [
+          "postOfficeId",
+          "recipientName",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LETTER",
+              "PACKAGE",
+              "PARCEL",
+              "POSTCARD"
+            ]
+          },
+          "postOfficeId": {
+            "type": "integer",
+            "description": "Идентификатор почтового отделения",
+            "format": "int64",
+            "example": 1
+          },
+          "recipientName": {
+            "type": "string",
+            "description": "Имя получателя",
+            "example": "Иван"
+          }
+        }
+      },
+      "HistoryDto": {
+        "type": "object",
+        "properties": {
+          "office": {
+            "$ref": "#/components/schemas/PostOfficeDto"
+          },
+          "item": {
+            "$ref": "#/components/schemas/PostalItemRequestDto"
+          },
+          "status": {
+            "type": "string",
+            "description": "Статус перемещения",
+            "enum": [
+              "ACCEPTED",
+              "DESPATCHED",
+              "DELIVERY"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
